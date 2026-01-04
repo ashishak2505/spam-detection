@@ -8,6 +8,9 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
+nltk.download('stopwords')
+
+
 st.set_page_config(
     page_title="Spam Email Detector",
     page_icon="📧",

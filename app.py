@@ -8,7 +8,14 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
-nltk.download('stopwords')
+def load_stopwords():
+    try:
+        return set(stopwords.words("english"))
+    except LookupError:
+        nltk.download("stopwords")
+        return set(stopwords.words("english"))
+
+stop_words = load_stopwords()
 
 
 st.set_page_config(

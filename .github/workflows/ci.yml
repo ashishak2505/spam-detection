@@ -21,6 +21,6 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run app check
+    - name: Run CI test
       run: |
-        python app.py
+        python test_ci.py

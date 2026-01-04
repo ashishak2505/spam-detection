@@ -5,8 +5,13 @@
 __pycache__/
 *.pyc
 
-# Models
-model/*.pkl
+# Ignore all pickle files
+*.pkl
+
+# BUT track model files
+!model/spam_classifier.pkl
+!model/tfidf_vectorizer.pkl
+
 
 # Environment
 .env

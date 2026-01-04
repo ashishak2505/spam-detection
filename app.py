@@ -5,23 +5,11 @@ import os
 import joblib
 import nltk
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+
+import nltk
+from nltk.corpus import stopwords
+
 @st.cache_resource
-def load_nltk_resources():
-    resources = ["stopwords", "punkt"]
-    for r in resources:
-        try:
-            nltk.data.find(f"corpora/{r}")
-        except LookupError:
-            try:
-                nltk.data.find(f"tokenizers/{r}")
-            except LookupError:
-                nltk.download(r)
-
-load_nltk_resources()
-
-
 def load_stopwords():
     try:
         return set(stopwords.words("english"))
@@ -30,6 +18,7 @@ def load_stopwords():
         return set(stopwords.words("english"))
 
 stop_words = load_stopwords()
+
 
 
 st.set_page_config(
@@ -57,10 +46,12 @@ def preprocess_text(text):
     text = re.sub(r'http\S+|www\S+', '', text)
     text = re.sub(r'\d+', '', text)
     text = re.sub(r'[^\w\s]', '', text)
-    tokens = word_tokenize(text)
+
+    tokens = text.split()   # ✅ SAFE TOKENIZATION
     tokens = [w for w in tokens if w not in stop_words]
-    tokens = [lemmatizer.lemmatize(w) for w in tokens]
+
     return " ".join(tokens)
+
 
 # ─── Sidebar ─────────────────────────────
 with st.sidebar:

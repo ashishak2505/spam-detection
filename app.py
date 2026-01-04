@@ -7,6 +7,20 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+@st.cache_resource
+def load_nltk_resources():
+    resources = ["stopwords", "punkt"]
+    for r in resources:
+        try:
+            nltk.data.find(f"corpora/{r}")
+        except LookupError:
+            try:
+                nltk.data.find(f"tokenizers/{r}")
+            except LookupError:
+                nltk.download(r)
+
+load_nltk_resources()
+
 
 def load_stopwords():
     try:

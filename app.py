@@ -39,7 +39,6 @@ tfidf = joblib.load(VECTORIZER_PATH)
 
 
 stop_words = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
 
 def preprocess_text(text):
     text = text.lower()

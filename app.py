@@ -1,6 +1,8 @@
 import streamlit as st
 import joblib
 import re
+import os
+import joblib
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -12,10 +14,16 @@ st.set_page_config(
     layout="centered"
 )
 
-# Load model & vectorizer
-MODEL_PATH = r"C:\Users\anku3\span_email_nlp\model"
-model = joblib.load(f"{MODEL_PATH}/spam_classifier.pkl")
-tfidf = joblib.load(f"{MODEL_PATH}/tfidf_vectorizer.pkl")
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_PATH = os.path.join(BASE_DIR, "model", "spam_classifier.pkl")
+VECTORIZER_PATH = os.path.join(BASE_DIR, "model", "tfidf_vectorizer.pkl")
+
+model = joblib.load(MODEL_PATH)
+tfidf = joblib.load(VECTORIZER_PATH)
+
 
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()

@@ -25,3 +25,5 @@ jobs:
       run: |
         python test_ci.py
         python check_model.py
+    - name: Build Docker image
+      run: docker build -t spam-app .
